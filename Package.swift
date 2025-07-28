@@ -4,21 +4,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-generate-uuids",
+    name: "UUIDGenerator",
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v10_15),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "swift-generate-uuids",
-            targets: ["swift-generate-uuids"]),
+            name: "UUIDGenerator",
+            targets: ["UUIDGenerator"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "swift-generate-uuids"),
+            name: "UUIDGenerator"),
         .testTarget(
-            name: "swift-generate-uuidsTests",
-            dependencies: ["swift-generate-uuids"]
-        ),
+            name: "UUIDGeneratorTests",
+            dependencies: ["UUIDGenerator"]),
     ]
 )
