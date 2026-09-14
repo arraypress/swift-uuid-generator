@@ -66,9 +66,10 @@ final class UUIDGeneratorTests: XCTestCase {
         let v4UUID = UUIDGenerator.generate(version: .v4)
         XCTAssertTrue(UUIDGenerator.isValid(v4UUID), "v4 UUID should be valid")
         
-        // Test v1 generation (note: Foundation generates v4 for both)
-        let v1UUID = UUIDGenerator.generate(version: .v1)
-        XCTAssertTrue(UUIDGenerator.isValid(v1UUID), "v1 UUID should be valid")
+        // v7 is a real version 7, not a v4 wearing a label.
+        let v7UUID = UUIDGenerator.generate(version: .v7)
+        XCTAssertTrue(UUIDGenerator.isValid(v7UUID), "v7 UUID should be valid")
+        XCTAssertNotNil(UUIDGenerator.creationDate(of: v7UUID), "a v7 carries the time it was made")
     }
     
     // MARK: - Format Tests
@@ -252,8 +253,8 @@ final class UUIDGeneratorTests: XCTestCase {
             switch version {
             case .v4:
                 XCTAssertTrue(version.isRandom, "v4 should be random")
-            case .v1:
-                XCTAssertFalse(version.isRandom, "v1 should not be random (conceptually)")
+            default:
+                XCTAssertFalse(version.isRandom, "\(version) is not purely random")
             }
         }
     }
